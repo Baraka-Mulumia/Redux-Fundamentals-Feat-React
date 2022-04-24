@@ -1,0 +1,52 @@
+{
+  "name": "redux-fundamentals-feat-react",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Redux makes it easy to add scalable, production-ready state management into your web applications. You will commonly find Redux in many medium-to-large React applications. Learn the Redux API from scratch, then learn to hook the Redux React application. You'll also learn how to extend Redux with various tools from its ecosystem.",
+  "author": {
+    "email": "barakamulumia@gmail.com",
+    "name": "Baraka Mulumia",
+    "url": "https://barakamulmia.vercel.app"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.8",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "framer-motion": "6",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-redux": "^7.2.8",
+    "react-scripts": "5.0.0",
+    "redux": "^4.1.2",
+    "shortid": "^2.2.16",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
