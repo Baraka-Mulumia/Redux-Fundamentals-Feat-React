@@ -10,7 +10,15 @@ import {
     VStack,
 } from "@chakra-ui/react";
 
-export const MenuItem = ({ name, price, quantity, onRemove, onPriceUpdate, onQuantityUpdate }) => {
+export const MenuItem = ({
+    name,
+    price,
+    quantity,
+    onRemove,
+    onPriceUpdate,
+    onQuantityUpdate,
+    total,
+}) => {
     const handleRemove = () => {
         if (typeof onRemove == "function") {
             return onRemove();
@@ -61,7 +69,7 @@ export const MenuItem = ({ name, price, quantity, onRemove, onPriceUpdate, onQua
                 <VStack justifySelf={"flex-end"} align={"end"} p={2} w={"50%"}>
                     <Text fontWeight={600}>Total</Text>
                     <Text fontWeight={300} fontSize={"md"}>
-                        ${price * quantity}
+                        ${total}
                     </Text>
                 </VStack>
             </HStack>
