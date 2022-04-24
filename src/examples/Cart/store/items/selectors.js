@@ -5,7 +5,7 @@ export const selectItem = (state, props) => state.items.find((item) => item.uuid
 export const selectItemTotal = createSelector(selectItem, (item) => item.price * item.quantity);
 
 export const selectItems = (state) => state.items;
-export const selectTipPercentage = (state) => state.tip.tipPercentage;
+export const selectTipPercentage = (state) => state.tip;
 
 export const selectSubtotal = createSelector(selectItems, (items) =>
     items.reduce((sum, item) => sum + item.price * item.quantity, 0)
