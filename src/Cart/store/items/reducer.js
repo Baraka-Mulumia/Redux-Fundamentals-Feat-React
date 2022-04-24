@@ -1,5 +1,6 @@
 import { ITEM_ADDED, ITEM_PRICE_UPDATED, ITEM_QUANTITY_UPDATED, ITEM_REMOVED } from "./actions";
 
+import produce from "immer";
 import { generate as shortid } from "shortid";
 
 export const initialItems = [
@@ -20,26 +21,26 @@ export const initialItems = [
 export const reducer = (state = initialItems, action) => {
     switch (action.type) {
         case ITEM_ADDED:
-            const item = { uuid: shortid(), quantity: 1, ...action.payload };
-            return [...state, item];
+            return produce(state, (draftState) => {
+                const item = { uuid: shortid(), quantity: 1, ...action.payload };
+                draftState.push(item);
+            });
 
         case ITEM_REMOVED:
             return state.filter((item) => item.uuid !== action.payload);
 
         case ITEM_PRICE_UPDATED:
-            return state.map((item) => {
-                if (item.uuid === action.payload.uuid) {
-                    return { ...item, price: action.payload.price };
-                }
-                return item;
+            return produce(state, (draftState) => {
+                const item = draftState.find((item) => item.uuid === action.payload.uuid);
+                item.price = action.payload.price;
             });
+
         case ITEM_QUANTITY_UPDATED:
-            return state.map((item) => {
-                if (item.uuid === action.payload.uuid) {
-                    return { ...item, quantity: action.payload.quantity };
-                }
-                return item;
+            return produce(state, (draftState) => {
+                const item = draftState.find((item) => item.uuid === action.payload.uuid);
+                item.quantity = action.payload.quantity;
             });
+
         default:
             return state;
     }
