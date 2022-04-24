@@ -5,8 +5,8 @@ You will commonly find Redux in many medium-to-large React applications.
 
 ## Contents
 
-### `1. Redux API from scratch.`
+### 1. Redux API from scratch.
 
-### `2. How to hook the Redux to a React application.`
+### 2. How to hook the Redux to a React application.
 
-### `3. How to extend Redux with various tools from its ecosystem.`
+### 3. How to extend Redux with various tools from its ecosystem.
