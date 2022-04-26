@@ -1,4 +1,4 @@
-import { createAction, createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const createTask = (title) => ({
     title,
@@ -18,24 +18,27 @@ const taskSlice = createSlice({
         addTask(state, action) {
             state.push(createTask(action.payload));
         },
-        toggle(state, action) {
-            const task = state.find((task) => task.uuid === action.payload.taskId);
-            task.completed = action.payload.completed;
+        toggle: {
+            reducer(state, action) {
+                const task = state.find((task) => task.uuid === action.payload.taskId);
+                task.completed = action.payload.completed;
+            },
+            prepare(taskId, completed) {
+                return { payload: { taskId, completed } };
+            },
         },
-        assignToUser(state, action) {
-            const task = state.find((task) => task.uuid === action.payload.taskId);
-            task.assignedTo = action.payload.humanId;
+        assignToUser: {
+            reducer(state, action) {
+                const task = state.find((task) => task.uuid === action.payload.taskId);
+                task.assignedTo = action.payload.humanId;
+            },
+            prepare(taskId, humanId) {
+                return { payload: { taskId, humanId } };
+            },
         },
     },
 });
 
-export const { addTask } = taskSlice.actions;
+export const { addTask, assignToUser, toggle } = taskSlice.actions;
 
-export const toggle = createAction("tasks/toggle", (taskId, completed) => ({
-    payload: { taskId, completed },
-}));
-
-export const assignToUser = createAction("tasks/assignToUser", (taskId, humanId) => ({
-    payload: { taskId, humanId },
-}));
 export default taskSlice.reducer;
