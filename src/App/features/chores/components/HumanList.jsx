@@ -1,18 +1,44 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Spinner, Text, VStack } from "@chakra-ui/react";
+import {
+    selectHumanTasks,
+    selectHumansFetchError,
+    selectHumansFetchLoadingState,
+} from "../selectors";
+import { useDispatch, useSelector } from "react-redux";
 
 import Container from "./Container";
+import Error from "./Error";
 import { TaskView } from "./TaskList";
 import UseChores from "../../../hooks/UseChores";
-import { selectHumanTasks } from "../selectors";
-import { useSelector } from "react-redux";
+import { fetchHumans } from "../HumanSlice";
+import { useEffect } from "react";
 
 const HumanList = () => {
+    const dispatch = useDispatch();
+    const error = useSelector(selectHumansFetchError);
+    const isLoading = useSelector(selectHumansFetchLoadingState);
+
+    useEffect(() => {
+        const getHumans = async () => dispatch(fetchHumans());
+        getHumans();
+    }, [dispatch]);
+
     const [{ addHuman }, , humans] = UseChores();
     return (
         <Container title={"Humans"} subtitle={"Name"} placeholderText={"New Name"} onAdd={addHuman}>
-            {humans.map((human) => (
-                <Human key={human?.uuid} {...human} />
-            ))}
+            {isLoading ? (
+                <Center>
+                    <Spinner size={"xl"} />
+                </Center>
+            ) : error.isError ? (
+                <Error title={"We Apologize for the inconvenience"} desc={error.message} />
+            ) : (
+                <>
+                    {humans.map((human) => (
+                        <Human key={human?.uuid} {...human} />
+                    ))}
+                </>
+            )}
         </Container>
     );
 };
