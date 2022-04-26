@@ -36,9 +36,11 @@ export const TaskView = ({ title, uuid, completed, assignedTo }) => {
                 mt={4}
                 onChange={(event) => assignToUser(uuid, event.target.value)}
             >
-                <option value="">"(Unassigned)"</option>
+                <option value="">(Unassigned)</option>
                 {humans.map((human) => (
-                    <option value={human.uuid}>{human.name}</option>
+                    <option value={human.uuid} key={human.uuid}>
+                        {human.name}
+                    </option>
                 ))}
             </Select>
         </Box>
